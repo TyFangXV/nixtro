@@ -1,6 +1,7 @@
 import * as env from 'dotenv'
 import express from 'express'
-import router from './middleware/task/task';
+import TaskRouter from './middleware/task/task';
+import UserRouter from './middleware/auth/CreateAccount'
 import mongoose from 'mongoose'
 env.config();
 
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: false })); // Express URL Encoded Parser
 app.set("trust proxy", 1);
 
 
-app.use("/task", router)
+app.use("/task", TaskRouter)
+app.use("/account", UserRouter)
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
